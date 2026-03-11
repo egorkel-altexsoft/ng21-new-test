@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { User, userSchema } from './user-schema';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +9,11 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('zod-test');
+  protected readonly user = signal<User>(
+    userSchema.parse({
+      name: 'John Doe',
+      email: 'john.doe@example.com',
+      age: 20
+    })
+  );
 }
