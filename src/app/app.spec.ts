@@ -67,6 +67,7 @@ describe('App', () => {
     } as const satisfies MovieSearchResult);
     const movies = await locateMovies();
     await expect.element(movies).toBeVisible();
+    await expect.element(movies.getByRole('listitem')).toHaveLength(1);
     const movie = movies.getByText('Star Wars (1977)');
     await expect.element(movie).toBeVisible();
   });
