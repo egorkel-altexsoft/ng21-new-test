@@ -1,7 +1,18 @@
-<p>{{ user().name }}</p>
-<p>{{ user().email }}</p>
-<p>{{ user().age }}</p>
+<input type="search" placeholder="Search movies..." [(ngModel)]="query" />
 
-<p>{{ bigNumber() }}</p>
+@if (isLoading()) {
+  <p>Loading...</p>
+}
 
-<router-outlet />
+@if (error(); as err) {
+  <p data-testid="error">Error: {{ err }}</p>
+}
+
+<ul>
+  @for (movie of movies(); track movie.imdbID) {
+    <li>
+      <img [src]="movie.Poster" [alt]="movie.Title" width="80" />
+      <span>{{ movie.Title }} ({{ movie.Year }})</span>
+    </li>
+  }
+</ul>

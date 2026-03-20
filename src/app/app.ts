@@ -1,24 +1,21 @@
-import { Component, computed, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { BigNumber } from 'bignumber.js';
-import { User, userSchema } from './user-schema';
+import { Component, computed, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+import { Movies } from './movies';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [FormsModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly user = signal<User>(
-    userSchema.parse({
-      name: 'John Doe',
-      email: 'john.doe@example.com',
-      age: 20
-    })
+  readonly #movies = inject(Movies);
+
+  protected readonly query = this.#movies.query;
+  protected readonly movies = computed(() =>
+    this.#movies.moviesResource.error() ? [] : (this.#movies.moviesResource.value()?.Search ?? [])
   );
-
-  readonly #bigNumber = signal(new BigNumber(100));
-
-  protected readonly bigNumber = computed(() => this.#bigNumber().plus(1).toNumber());
+  protected readonly isLoading = this.#movies.moviesResource.isLoading;
+  protected readonly error = computed(() => this.#movies.moviesResource.error()?.message);
 }
