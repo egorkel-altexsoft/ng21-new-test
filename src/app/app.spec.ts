@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 import { page } from 'vitest/browser';
 
 import { App } from './app';
-import { MovieSearchResult } from './movie/movie.schema';
+import { type MovieSearchResult } from './movie/movie.schema';
 import { Movies } from './movies';
 
 describe('App', () => {
