@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 import { page } from 'vitest/browser';
 
 import { App } from './app';
-import { type MovieSearchResult } from './movie/movie.schema';
+import { MovieSchema, type MovieSearchResult } from './movie/movie.schema';
 import { Movies } from './movies';
 
 describe('App', () => {
@@ -54,13 +54,13 @@ describe('App', () => {
     const request = httpMock.expectOne('https://www.omdbapi.com/?apikey=YOUR_API_KEY&s=star%20wars');
     request.flush({
       Search: [
-        {
+        MovieSchema.parse({
           Title: 'Star Wars',
           Year: '1977',
           Poster:
             'https://m.media-amazon.com/images/M/MV5BN2Q5OGZkODktYjkxNy00MzZlLTg5MmEtY2Q1M2YzNzg4ODllXkEyXkFqcGc@._V1_.jpg',
           imdbID: 'tt0076759'
-        }
+        })
       ],
       totalResults: '1',
       Response: 'True'
