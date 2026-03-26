@@ -16,26 +16,26 @@
   },
   "engineStrict": true,
   "dependencies": {
-    "@angular/common": "^21.2.2",
-    "@angular/compiler": "^21.2.2",
-    "@angular/core": "^21.2.2",
-    "@angular/forms": "^21.2.2",
-    "@angular/platform-browser": "^21.2.2",
-    "@angular/router": "^21.2.2",
+    "@angular/common": "^21.2.6",
+    "@angular/compiler": "^21.2.6",
+    "@angular/core": "^21.2.6",
+    "@angular/forms": "^21.2.6",
+    "@angular/platform-browser": "^21.2.6",
+    "@angular/router": "^21.2.6",
     "bignumber.js": "^10.0.2",
     "rxjs": "~7.8.2",
     "tslib": "^2.8.1",
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@angular/build": "^21.2.1",
-    "@angular/cli": "^21.2.1",
-    "@angular/compiler-cli": "^21.2.2",
-    "@vitest/browser-playwright": "^4.0.8",
-    "playwright": "^1.48.0",
+    "@angular/build": "^21.2.4",
+    "@angular/cli": "^21.2.4",
+    "@angular/compiler-cli": "^21.2.6",
+    "@vitest/browser-playwright": "^4.1.2",
+    "playwright": "^1.58.2",
     "prettier": "^3.8.1",
     "typescript": "~5.9.3",
-    "vitest": "^4.0.18"
+    "vitest": "^4.1.2"
   },
   "browserslist": [
     "baseline widely available"
