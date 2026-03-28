@@ -1,10 +1,12 @@
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { describe, expect, it } from 'vitest';
 import { page } from 'vitest/browser';
 
 import { App } from './app';
+import { routes } from './app.routes';
 import { MovieSchema, type MovieSearchResult } from './movie/movie.schema';
 import { Movies } from './movies';
 
@@ -71,11 +73,19 @@ describe('App', () => {
     const movie = movies.getByText('Star Wars (1977)');
     await expect.element(movie).toBeVisible();
   });
+
+  it('should navigate to login screen when clicking login link', async () => {
+    const { locateLoginLink, locateEmailInput, locatePasswordInput } = setup();
+    const loginLink = await locateLoginLink();
+    await loginLink.click();
+    await locateEmailInput();
+    await locatePasswordInput();
+  });
 });
 
 function setup() {
   TestBed.configureTestingModule({
-    providers: [provideHttpClient(), provideHttpClientTesting(), Movies]
+    providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter(routes), Movies]
   });
   const httpMock = TestBed.inject(HttpTestingController);
   TestBed.createComponent(App);
@@ -104,5 +114,23 @@ function setup() {
     return error;
   }
 
-  return { httpMock, locateInput, locateMovies, locateLoading, locateError };
+  async function locateLoginLink() {
+    const link = page.getByRole('link', { name: 'Login' });
+    await expect.element(link).toBeVisible();
+    return link;
+  }
+
+  async function locateEmailInput() {
+    const input = page.getByLabelText('Email');
+    await expect.element(input).toBeVisible();
+    return input;
+  }
+
+  async function locatePasswordInput() {
+    const input = page.getByLabelText('Password');
+    await expect.element(input).toBeVisible();
+    return input;
+  }
+
+  return { httpMock, locateInput, locateMovies, locateLoading, locateError, locateLoginLink, locateEmailInput, locatePasswordInput };
 }

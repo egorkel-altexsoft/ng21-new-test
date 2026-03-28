@@ -1,0 +1,27 @@
+<form [formRoot]="loginForm" (ngSubmit)="onSubmit()">
+  <div class="form-field">
+    <label for="email">Email</label>
+    <input id="email" type="email" [formField]="loginForm.email" autocomplete="email" />
+    @if (loginForm.email().touched() && loginForm.email().invalid()) {
+      <div class="errors">
+        @for (error of loginForm.email().errors(); track error.kind) {
+          <p>{{ error.message }}</p>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="form-field">
+    <label for="password">Password</label>
+    <input id="password" type="password" [formField]="loginForm.password" autocomplete="current-password" />
+    @if (loginForm.password().touched() && loginForm.password().invalid()) {
+      <div class="errors">
+        @for (error of loginForm.password().errors(); track error.kind) {
+          <p>{{ error.message }}</p>
+        }
+      </div>
+    }
+  </div>
+
+  <button type="submit">Log In</button>
+</form>
