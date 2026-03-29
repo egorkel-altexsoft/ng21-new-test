@@ -23,9 +23,9 @@ describe('LoginComponent', () => {
     const { locateSubmit } = setup();
     const submit = await locateSubmit();
     await submit.click();
-    const emailError = page.getByText('Email is required');
+    const emailError = page.getByText('Please enter a valid email address');
     await expect.element(emailError).toBeVisible();
-    const passwordError = page.getByText('Password is required');
+    const passwordError = page.getByText('Password must be at least 12 characters');
     await expect.element(passwordError).toBeVisible();
   });
 
